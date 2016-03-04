@@ -4,16 +4,16 @@
 
 int main(int argc, char** argv)
 {
-	char* szTargetWindow = "Dota 2";
+	char* szTargetWindow = (char*)malloc(7);
+	strcpy_s(szTargetWindow, 7, "Dota 2");
+
 	if (argc > 1)
 	{
 		size_t temp = strlen(argv[1]);
 		if (strlen(szTargetWindow) < temp)
 		{
-			free(szTargetWindow);
-			szTargetWindow = 0;
-			szTargetWindow = (char*)malloc(temp);	
-			memcpy(szTargetWindow, argv[1], temp);
+			szTargetWindow = (char*)realloc(szTargetWindow, temp + 1);
+			strcpy_s(szTargetWindow, temp, argv[1]);
 		}
 	}
 
